@@ -1,0 +1,137 @@
+ /* body {
+    background: blue;
+    height:100%;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .level-container{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  @mixin pixelmatic-lr($art, $size: 10px){
+    display: block;
+    height: $size;
+    width: $size;
+    $shadow: 0 0 transparent;
+    @for $y from 1 through length($art){
+      @for $x from 1 through length(nth($art, $y)){
+        $shadow: $shadow
+        + ", " + 
+        ($x * $size)
+        + " " + 
+        ($y * $size) 
+        + " " + 
+        nth(nth($art, $y), $x) ;
+      }
+    }
+    box-shadow: unquote($shadow);
+  }
+  @mixin pixelmatic-ud($art, $size: 10px){
+    display: block;
+    height: $size;
+    width: $size;
+    $shadow: 0 0 transparent;
+    @for $x from 1 through length($art){
+      @for $y from 1 through length(nth($art, $x)){
+        $shadow: $shadow
+        + ", " + 
+        ($x * $size)
+        + " " + 
+        ($y * $size) 
+        + " " + 
+        nth(nth($art, $x), $y) ;
+      }
+    }
+    box-shadow: unquote($shadow);
+  }
+  
+  .row-container{
+    width: 100%;
+    float: left;
+  }
+  .row{
+    width: $size*32;
+    height: $size*38;
+    margin: 0 auto;
+    position: relative;
+    top: 25%;
+  }
+  .sonic {
+    @include pixelmatic-lr($sonic1, $size);
+    animation: sprint $tick infinite;
+  }
+  
+  @keyframes sprint {
+    0% { @include pixelmatic-lr($sonic1, $size);}
+    25% { @include pixelmatic-lr($sonic2, $size);}
+    50% { @include pixelmatic-lr($sonic3, $size);}
+    75% { @include pixelmatic-lr($sonic4, $size);}
+  }
+  $tube: $f1 $f2 $f2 $f2 $f2 $f2 $f3 $a $f4 $f5 $f6 $f7 $f7 $f6 $f5 $f8 $f8 $f8 $f8 $f8 $f8 $f8 $f8 $f8 $f7 $f5 $f5 $f5 $f5 $f5 $f3 $f4;
+  .tube-container{
+    height: $size*36;
+    float: left;
+    width: 100%;
+  }
+  .tube{
+    @include pixelmatic-lr($tube, $size);
+    float: left;
+    height: $size;
+    width: 100%;
+    margin: -1*$size;
+  }
+
+  .support-1{
+    @include pixelmatic-ud($support, $size);
+    position: absolute;
+    height: $size;
+    width: $size;
+    right: 10%;
+    margin: -1*$size;
+    animation: move-1 $tick infinite;
+  }
+  
+  @keyframes move-1 {
+    0% { right: 0%}
+    20% { right: 10%}
+    40% { right: 20%}
+    60% { right: 30%}
+    80% { right: 40%}
+    100% { right: 50%}
+  }
+  .support-2{
+    @include pixelmatic-ud($support, $size);
+    position: absolute;
+    height: $size;
+    width: $size;
+    right: 60%;
+    margin: -1*$size;
+    animation: move-2 $tick infinite;
+  }
+  
+  @keyframes move-2 {
+    0% { right: 50%}
+    20% { right: 60%}
+    40% { right: 70%}
+    60% { right: 80%}
+    80% { right: 90%}
+    100% { right: 100%}
+  }
+   */
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+#greenHill-zone {
+    background: rgb(245, 239, 239); 
+    border: 8px solid lightskyblue;
+    display: block;
+    margin: 0 auto;
+}
