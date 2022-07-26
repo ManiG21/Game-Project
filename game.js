@@ -28,3 +28,14 @@ const getAngles = (clientX, clientY) => {
       menu.attributeStyleMap.set('--y', `${dx / 20}deg`)
     })
   }
+  //event listener on the start button
+  //When button is clicked
+  //hide main menu
+  // show game 
+  // start game
+
+  //need an id on button
+  // addEventListener(Type, listener)
+  const startButton = document.querySelector('start game')
+
+  startButton.addEventListener('click', )

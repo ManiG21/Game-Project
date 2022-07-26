@@ -8,8 +8,15 @@ html {
 /* 3D perspective */
 body {
   perspective: 40vw;
+  
 }
 
+.hidden {
+  display: none;
+}
+.main-menu {
+  background-image: url('sonic-2.webp')
+}
 
  
  
