@@ -17,11 +17,19 @@ ctx.beginPath();
 const images = {};
 images.player = new Image();
 images.ground = new Image();
+images.background = new Image();
 images.player.onload = function(){
 
 }
-
-images.ground.src = 'Ground-flat.png';
+//Link to image: https://www.artstation.com/artwork/3dwbWA
+images.background.src = 'Green-hill-background.jpg';
+function drawBackG(img, sX, sY, sW, sH){ 
+ ctx.drawImage(img, sX, sY, sW, sH);
+}
+function back(){
+    drawFlatG(images.background, 0, 0, canvas.width, canvas.height)
+}
+images.ground.src = 'Ground flat.png';
 function drawFlatG(img, sX, sY, sW, sH){ 
  ctx.drawImage(img, sX, sY, sW, sH);
 }
@@ -42,7 +50,7 @@ const playerSpeed = 6;
 let sonicCurrentFrame = 0;
 
 
-
+//Video that helped me get the sprite https://youtu.be/GVuU25pGaYo
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
     
@@ -53,7 +61,7 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
 // }
  
 function animate(){
-    
+    back()
     floor()
     ctx.clearRect(0,0,canvas.Width, canvas.height);
     drawSprite(images.player, playerWidth * playerFrameX, playerHeight * playerFrameY,
