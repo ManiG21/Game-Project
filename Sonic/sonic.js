@@ -39,15 +39,24 @@ function floor(){
 }
 
     
-images.player.src = 'Sonic-Sprite.png';
-const playerWidth = 62.5;
-const playerHeight = 91.5;
-let playerFrameX = .55;
-let playerFrameY = 1;
+images.player.src = 'Sonic-Sprite3.png';
+const playerWidth = 124;
+const playerHeight = 160;
+let playerFrameX = 0;
+let playerFrameY =  2;
 let playerX = 0;
-let playerY = 510;
+let playerY = 435;
 const playerSpeed = 6;
-let sonicCurrentFrame = 0;
+
+// let sonicCurrentFrame = 0;
+// const playerWidth = 123.8;
+// const playerHeight = 183;
+// let playerFrameX = 12.55;
+// let playerFrameY =  1;
+// let playerX = 0;
+// let playerY = 435;
+// const playerSpeed = 6;
+// let sonicCurrentFrame = 0;
 
 
 //Video that helped me get the sprite https://youtu.be/GVuU25pGaYo
@@ -61,26 +70,54 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
 // }
  
 function animate(){
-    back()
-    floor()
+   
     ctx.clearRect(0,0,canvas.Width, canvas.height);
+    back()
+    ctx.font = '40px arial  '
+    ctx.strokeText('Score: 00000', 70, 70)
+    
+    movement()
+    floor()
     drawSprite(images.player, playerWidth * playerFrameX, playerHeight * playerFrameY,
         playerWidth, playerHeight, playerX, playerY, playerWidth, playerHeight);
         
      //animate sprtes
-        if (playerFrameX < 3 && playerFrameY < 1) playerFrameY++;
-      else playerFrameX = 7;
-    //   //move player
-      if (playerX < canvas.width + playerWidth) playerX +=
-      playerSpeed;
-      else playerX = 0 - playerWidth;
+        if (playerFrameX < 9 && playerFrameY  <= 2) playerFrameX++;
+    //   else playerFrameX = 7;
+    // //   //move player
+
+    
+    //  else if (playerX < canvas.width + playerWidth) playerX +=
+    //   playerSpeed;
+    //   else playerX = 0 - playerWidth;
      
 
     }
 
 window.onload = setInterval(animate, 1000/30);
+// let jump = false
+// let forward = false
+// let back = false
+// let duck = false
+function jUp(e) {
+    if(e.keycode === 32){
 
-Crafty.init(200, 200);
+    }
+return
+}
+
+function movement(a) {
+    if(a.keycode === 39){
+   playerX += 30
+    }
+    else if(a.keycode === 37){
+   playerX - 30 }
+    // else (a.keycode === 40){
+
+    // } return
+}
+
+// Crafty.init(200, 200);
 
 // const dim1 = {x: 5, y: 5, w: 50, h: 50}
 // const dim2 = {x: 20, y: 10, w: 60, h: 40}
