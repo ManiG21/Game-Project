@@ -4,6 +4,7 @@ const ctx = canvas.getContext('2d');
 const backImage = document.getElementById('ground-flat');
 let offset = 0
 let ground = canvas.height / 3
+
 ctx.beginPath();
 // ctx.rect(0, 535, 1400, ground);
 // ctx.fillStyle = "green";
@@ -18,35 +19,38 @@ const images = {};
 images.player = new Image();
 images.ground = new Image();
 images.background = new Image();
-images.player.onload = function(){
+images.player.onload = function () {
 
 }
 //Link to image: https://www.artstation.com/artwork/3dwbWA
 images.background.src = 'Green-hill-background.jpg';
-function drawBackG(img, sX, sY, sW, sH){ 
- ctx.drawImage(img, sX, sY, sW, sH);
+function drawBackG(img, sX, sY, sW, sH) {
+    ctx.drawImage(img, sX, sY, sW, sH);
 }
-function back(){
+function back() {
     drawFlatG(images.background, 0, 0, canvas.width, canvas.height)
 }
 images.ground.src = 'Ground flat.png';
-function drawFlatG(img, sX, sY, sW, sH){ 
- ctx.drawImage(img, sX, sY, sW, sH);
+function drawFlatG(img, sX, sY, sW, sH) {
+    ctx.drawImage(img, sX, sY, sW, sH);
 }
 
-function floor(){
+function floor() {
     drawFlatG(images.ground, 0, 400, canvas.width, 400)
 }
 
-    
+
 images.player.src = 'Sonic-Sprite3.png';
-const playerWidth = 124;
+let Sonic = images.player
+const playerWidth = 126;
 const playerHeight = 160;
 let playerFrameX = 0;
-let playerFrameY =  2;
+let playerFrameY = 2;
 let playerX = 0;
 let playerY = 435;
-const playerSpeed = 6;
+const playerSpeed = 30;
+
+Sonic.addEventListener("keydown", movement, false);
 
 // let sonicCurrentFrame = 0;
 // const playerWidth = 123.8;
@@ -60,62 +64,66 @@ const playerSpeed = 6;
 
 
 //Video that helped me get the sprite https://youtu.be/GVuU25pGaYo
-function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH){
+function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-    
+
 }
 
 // function walk(){
 
 // }
- 
-function animate(){
-   
-    ctx.clearRect(0,0,canvas.Width, canvas.height);
+function movement(e) {
+    switch (e.keyCode) {
+        case 37:
+            playerX -= 2;
+            break;
+        case 39:
+            playerX += 600;
+            break;
+
+    }e.preventDefault();
+
+}
+
+
+
+function animate() {
+
+    // ctx.clearRect(0,0,canvas.Width, canvas.height);
+
     back()
     ctx.font = '40px arial  '
     ctx.strokeText('Score: 00000', 70, 70)
-    
-    movement()
+
+
     floor()
     drawSprite(images.player, playerWidth * playerFrameX, playerHeight * playerFrameY,
         playerWidth, playerHeight, playerX, playerY, playerWidth, playerHeight);
-        
-     //animate sprtes
-        if (playerFrameX < 9 && playerFrameY  <= 2) playerFrameX++;
-    //   else playerFrameX = 7;
+
+    //animate sprtes
+    if (playerFrameX < 3 && playerFrameY <= 2) playerFrameX++;
+    else if (playerFrameX = 0);
     // //   //move player
+    else if (playerX < canvas.width + playerWidth) playerX +=
+        playerSpeed;
+    else playerX = 0 - playerWidth;
 
-    
-    //  else if (playerX < canvas.width + playerWidth) playerX +=
-    //   playerSpeed;
-    //   else playerX = 0 - playerWidth;
-     
 
-    }
+}
 
-window.onload = setInterval(animate, 1000/30);
+window.onload = setInterval(animate, 1000 / 60);
 // let jump = false
 // let forward = false
 // let back = false
 // let duck = false
-function jUp(e) {
-    if(e.keycode === 32){
+// function jUp(e) {
+//     if(e.keycode === 32){
 
-    }
-return
-}
+//     }
+// return
+// }
 
-function movement(a) {
-    if(a.keycode === 39){
-   playerX += 30
-    }
-    else if(a.keycode === 37){
-   playerX - 30 }
-    // else (a.keycode === 40){
 
-    // } return
-}
 
 // Crafty.init(200, 200);
 
@@ -138,3 +146,4 @@ function movement(a) {
 
 
 animate()
+movement()
