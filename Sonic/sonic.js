@@ -78,6 +78,8 @@ class Rings {
     // ctx.closePath()
 }
 let ring = new Rings(200, 300, 20, 0, Math.PI * 2)
+let ring2 = new Rings(700, 300, 20, 0, Math.PI * 2)
+let ring3 = new Rings(1150, 300, 20, 0, Math.PI * 2)
 
 
 
@@ -101,6 +103,14 @@ function collRing() {
     // if (sonic.x - ring.radius == ring.x && sonic.y - ring.radius == ring.y) {
     if (isColliding(sonic, ring)) {
         ring.x = Math.random() * canvas.width
+        Score++
+    }
+   else if (isColliding(sonic, ring2)) {
+        ring2.x = Math.random() * canvas.width
+        Score++
+    }
+    else if (isColliding(sonic, ring3)) {
+        ring3.x = Math.random() * canvas.width
         Score++
     }
 }
@@ -283,12 +293,22 @@ function animate() {
     back()
     //Showing Score count
     ctx.font = '40px arial'
-    ctx.fillText(`Score: ${Score}`, 70, 70)
+    ctx.fillText(`Rings: ${Score}`, 70, 70)
     ring.beginPath()
     ring.arc()
     ring.fill()
     ring.stroke()
     ring.closePath()
+    ring2.beginPath()
+    ring2.arc()
+    ring2.fill()
+    ring2.stroke()
+    ring2.closePath()
+    ring3.beginPath()
+    ring3.arc()
+    ring3.fill()
+    ring3.stroke()
+    ring3.closePath()
 
     // Rings()
     //adding the ground he stands on
