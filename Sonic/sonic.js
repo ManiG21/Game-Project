@@ -41,6 +41,8 @@ class Rings {
         this.x = x;
         this.y = y;
         this.radius = radius;
+        this.w = radius;
+        this.h = radius;
         this.startAngle = startAngle;
         this.endAngle = endAngle;
 
@@ -57,17 +59,17 @@ class Rings {
             this.endAngle
 
         )
-        
+
     }
     fill() {
         return ctx.fill()
     }
-    stroke(){
+    stroke() {
         return ctx.stroke()
     }
-    closePath(){
+    closePath() {
         return ctx.closePath()
-        
+
     }
     // ctx.arc(Math.floor(Math.random() * 1400), 300, 20, 0, Math.PI * 2, false);
     // ctx.fillStyle = "yellow";
@@ -75,22 +77,32 @@ class Rings {
     // ctx.stroke();
     // ctx.closePath()
 }
-let ring = new Rings(200, 300, 20, 0, Math.PI * 2) 
+let ring = new Rings(200, 300, 20, 0, Math.PI * 2)
 
 
 
 
-
-
-function collRing(){
-if(playerX - ring.radius == ring.x && playerY - ring.radius == ring.y){
-    ctx.clearRect(ring.x, ring.y, 100, 100);
-    
-    console.log('colision dected')
-    
-    Score ++
-    ctx.restore();
+function isColliding(obj1, obj2) {
+    // obj.x = left bound
+    // obj.x + obj.w = right bound
+    // obj.y = top bound
+    // obj.y + obj.h = bottom bound
+    return obj1.x < obj2.x + obj2.w &&
+        obj1.x + obj1.w > obj2.x &&
+        obj1.y < obj2.y + obj2.h &&
+        obj1.h + obj1.y > obj2.y
 }
+
+
+
+
+
+function collRing() {
+    // if (sonic.x - ring.radius == ring.x && sonic.y - ring.radius == ring.y) {
+    if (isColliding(sonic, ring)) {
+        ring.x = Math.random() * canvas.width
+        Score++
+    }
 }
 
 // function Collision(){
@@ -125,7 +137,7 @@ function floor() {
 // }
 
 // function onGround(){
-//    if(images.ground.height = playerY){
+//    if(images.ground.height = sonic.y){
 
 // }
 // }
@@ -133,13 +145,13 @@ function floor() {
 //Adding Sonic sprite from image to my code
 images.player.src = 'Sonic-Sprite3.png';
 
-const playerWidth = 126.5;
-const playerHeight = 160;
-let playerFrameX = 0;
-let playerFrameY = 2;
-let playerX = 0;
-let playerY = 435;
-const playerSpeed = 30;
+// const playerWidth = 126.5;
+// const playerHeight = 160;
+// let playerFrameX = 0;
+// let playerFrameY = 2;
+// let playerX = 0;
+// let sonic.y = 435;
+// const playerSpeed = 30;
 
 class Sonic {
     constructor() {
@@ -151,6 +163,7 @@ class Sonic {
         this.frameX = 0
         this.w = 126.5
         this.h = 160
+        this.gravityForce = 0
     }
 }
 const sonic = new Sonic
@@ -218,12 +231,12 @@ let gravityForce = 0
 
 
 function gravity() {
-    if (playerY >= groundLevel) {
-        playerY = groundLevel;
-        gravityForce = 0
+    if (sonic.y >= groundLevel) {
+        sonic.y = groundLevel;
+        sonic.gravityForce = 0
     } else {
-        gravityForce += .5
-        playerY += gravityForce;
+        sonic.gravityForce += .5
+        sonic.y += sonic.gravityForce;
 
     }
 
@@ -233,16 +246,16 @@ const groundLevel = 450
 function movement() {
     if (playerUp) {
         // gravityForce = 0
-        playerY += -50;
+        sonic.y += -50;
     }
     if (playerDown) {
-        playerY += -100;
+        sonic.y += -100;
     }
     if (playerRight) {
-        playerX += 10;
+        sonic.x += 10;
     }
     if (playerLeft) {
-        playerX += -10;
+        sonic.x += -10;
     }
 
     //rest, when no button is pressed him standing still
@@ -271,11 +284,11 @@ function animate() {
     //Showing Score count
     ctx.font = '40px arial'
     ctx.fillText(`Score: ${Score}`, 70, 70)
-ring.beginPath()
-ring.arc()
-ring.fill()
-ring.stroke()
-ring.closePath()
+    ring.beginPath()
+    ring.arc()
+    ring.fill()
+    ring.stroke()
+    ring.closePath()
 
     // Rings()
     //adding the ground he stands on
@@ -290,14 +303,16 @@ ring.closePath()
     // and taught me how to draw Sonic
     // Abe helped me get rid of background for the sprite, I figured out resize
     //animate sprtes
-    if (playerFrameX < 3 && playerFrameY <= 2) playerFrameX++;
-    else if (playerFrameX = 0);
+    if (sonic.frameX < 3 && sonic.frameY <= 2) sonic.frameX++;
+    else if (sonic.frameX = 0);
 
-    drawSprite(images.player, playerWidth * playerFrameX, playerHeight * playerFrameY,
-        playerWidth, playerHeight, playerX, playerY, playerWidth, playerHeight);
+    drawSprite(images.player, sonic.w * sonic.frameX, sonic.h * sonic.frameY,
+        sonic.w, sonic.h, sonic.x, sonic.y, sonic.w, sonic.h);
+    // drawSprite(images.player, playerWidth * playerFrameX, sonic.h * sonic.frameY,
+    //     playerWidth, playerHeight, sonic.x, sonic.y, playerWidth, playerHeight);
 
     // //   //move player
-    // else if (playerX < canvas.width + playerWidth) playerX +=
+    // else if (sonic.x < canvas.width + playerWidth) sonic.x +=
     //     playerSpeed;
     // else playerX = 0 - playerWidth;
     //trying to create idle frame
@@ -309,7 +324,7 @@ ring.closePath()
 
 }
 //increased frames per second
-window.onload = setInterval(animate, 1000 / 30);
+window.onload = setInterval(animate, 1000 / 50);
 // window.onload is an event that occurs when all the assets
 // have been successfully loaded( in this case only the spacebg.png)
 // window.onload = function() {
