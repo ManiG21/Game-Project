@@ -13,6 +13,8 @@ body {
 
 .hidden {
   display: none;
+   /* Website used to help design menu */
+ /* https://web.dev/building-a-3d-game-menu-component/#enabling-3d-perspective */
 }
 .main-menu {
   background-image: url('sonic-2.webp')
