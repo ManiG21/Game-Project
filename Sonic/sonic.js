@@ -1,4 +1,3 @@
-
 const canvas = document.getElementById('greenHill-zone');
 const ctx = canvas.getContext('2d');
 const backImage = document.getElementById('ground-flat');
@@ -11,11 +10,7 @@ ctx.fillStyle = "yellow";
 ctx.stroke();
 ctx.closePath();
 
-
-
 // Drawing my flat ground 
-
-
 // load images
 const images = {};
 images.player = new Image();
@@ -169,7 +164,7 @@ class Sonic {
         this.x = 0
         this.y = 435
         this.speed = 30
-        this.frameY = 2
+        this.frameY = 0
         this.frameX = 0
         this.w = 126.5
         this.h = 160
@@ -184,20 +179,47 @@ let Score = 0
 function ScoreCount() {
 
 }
-// const playerAnimations = {
-//     idle: {
-//         startX: 0, 
-//         startY: 0,
-//         frames: 16,
-//         width: 40
-//     },
-//     run: {
-//         startX: 0, 
-//         startY: 2,
-//         frames: 3,
-//         width: 126
-//     }
-// }
+const playerAnimations = {
+    idle: {
+        // frameX: 0, 
+        // startY: 0,
+        // frames: 16,
+        // width: 40
+        image : images.player,
+        // x : 0,
+        // y :435,
+        speed : 30,
+        frameY : 0,
+        frameX : 4,
+        w : 40,
+        h : 140,
+        // gravityForce : 0
+    },
+    run: {
+        frameX: 0, 
+        frameY: 2,
+        frames: 3,
+        width: 126
+    },
+    jump: {
+        frameX: 0, 
+        frameY: 4,
+        frames: 4,
+        width: 60
+    },
+    crouch: {
+        startX: 0, 
+        frameY: 5,
+        frames: 3,
+        width: 60
+    },
+    fall: {
+        startX: 0, 
+        startY: 8,
+        frames: 3,
+        width: 60
+    }
+}
 // const playerAnimation = 'run'
 //input Logic
 window.addEventListener("keydown", e => {
@@ -213,18 +235,6 @@ window.addEventListener("keyup", e => {
     else if (e.key === 'ArrowDown') playerDown = false
 });
 
-// let sonicCurrentFrame = 0;
-// const playerWidth = 123.8;
-// const playerHeight = 183;
-// let playerFrameX = 12.55;
-// let playerFrameY =  1;
-// let playerX = 0;
-// let playerY = 435;
-// const playerSpeed = 6;
-// let sonicCurrentFrame = 0;
-
-//if()
-
 
 //Video that helped me get the sprite https://youtu.be/GVuU25pGaYo
 function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
@@ -232,7 +242,7 @@ function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
 
 }
 
-// function walk(){
+// input keys
 let playerUp = false;
 let playerDown = false;
 let playerRight = false;
@@ -251,15 +261,16 @@ function gravity() {
     }
 
 }
+// constant y axis for sonic
 const groundLevel = 450
 
 function movement() {
     if (playerUp) {
         // gravityForce = 0
-        sonic.y += -50;
+        sonic.y += -20;
     }
     if (playerDown) {
-        sonic.y += -100;
+        sonic.y = 450;
     }
     if (playerRight) {
         sonic.x += 10;
@@ -267,28 +278,13 @@ function movement() {
     if (playerLeft) {
         sonic.x += -10;
     }
-
-    //rest, when no button is pressed him standing still
-    // if (button pressed === false){
-    // playerFrameX = 0 && playerFrameY = 0 }
-    // Jump animaition
-    // if (Up pressed === True){
-    // playerFrameX <= 4 && playerFrameY = 3 }
-    // if (Down pressed === True){
-    // playerFrameX <= 3 && playerFrameY = 5 }
-
+    if (playerUp)(playerDown)=>{
+         sonic.x += 30
+    }
 
 }
 
-
-
 function animate() {
-
-    // ctx.clearRect(0,0,canvas.Width, canvas.height);
-
-
-
-
     //Adding my background
     back()
     //Showing Score count
@@ -314,37 +310,53 @@ function animate() {
     //adding the ground he stands on
     floor()
     collRing()
-
     movement()
     gravity()
-
 
     //https://youtu.be/GVuU25pGaYo   This video helped me find the sprite sheets
     // and taught me how to draw Sonic
     // Abe helped me get rid of background for the sprite, I figured out resize
     //animate sprtes
-    if (sonic.frameX < 3 && sonic.frameY <= 2) sonic.frameX++;
-    else if (sonic.frameX = 0);
+    if( playerUp === false && playerDown === false && playerRight === false && playerLeft === false){
+        sonic.frameY = 0; sonic.frameX = 0.7; 
+      } else if (playerRight === true) {
+        sonic.frameY = 2;  sonic.frameX <= 2;
+    }
+     else if (playerLeft === true) {
+        sonic.frameY = 2; sonic.frameX++;
+         sonic.frameX = 0; 
+    }
+    //Jump animation
+     else if (playerUp === true) {
+        sonic.frameY = 4; sonic.frameX++;
+    }
+    //Trying to get falling animation
+     else if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false && sonic.y < 400) {
+        sonic.frameY = 8; sonic.frameX++;
+    }
+     else if (playerDown === true) {
+        playerAnimations.idle; sonic.frameY = 5; sonic.frameX++;
+    } else (sonic.frameX = 0);
+
+    if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
+  else  if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
+  else  if (sonic.frameX < 3 && sonic.frameY <= 2) sonic.frameX++;
+  else  if (sonic.frameX < 7 && sonic.frameY === 8) sonic.frameX++;
+else  (sonic.frameX = 0);
+     
 
     drawSprite(images.player, sonic.w * sonic.frameX, sonic.h * sonic.frameY,
         sonic.w, sonic.h, sonic.x, sonic.y, sonic.w, sonic.h);
+       
+
     // drawSprite(images.player, playerWidth * playerFrameX, sonic.h * sonic.frameY,
     //     playerWidth, playerHeight, sonic.x, sonic.y, playerWidth, playerHeight);
-
-    // //   //move player
-    // else if (sonic.x < canvas.width + playerWidth) sonic.x +=
-    //     playerSpeed;
-    // else playerX = 0 - playerWidth;
-    //trying to create idle frame
-    // else if( playerUp === false & playerDown === false & playerRight === false & playerLeft === false){
-    //     playerFrameX = 0 && playerFrameY = 0;
-    // }
-
-
-
+    
 }
 //increased frames per second
 window.onload = setInterval(animate, 1000 / 50);
+animate()
+
 // window.onload is an event that occurs when all the assets
 // have been successfully loaded( in this case only the spacebg.png)
 // window.onload = function() {
@@ -353,16 +365,13 @@ window.onload = setInterval(animate, 1000 / 50);
 //     // the scroll speed
 //     // an important thing to ensure here is that can.height
 //     // is divisible by scrollSpeed
-//    let scroll = .1
+
 
 //     // this is the primary animation loop that is called 60 times
 //     // per second
 //     function loop()
 //     {
 //         back()
-
-
-
 //         // update image height
 //         imgHeight += scrollSpeed;
 
@@ -379,11 +388,4 @@ window.onload = setInterval(animate, 1000 / 50);
 //     // this initiates the animation by calling the loop function
 //     // for the first time
 //     loop();
-
 // }
-animate()
-
-
-
-
-
