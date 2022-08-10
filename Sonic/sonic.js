@@ -330,8 +330,11 @@ function animate() {
      else if (playerUp === true) {
         sonic.frameY = 4; sonic.frameX++;
     }
+     else if (playerUp === true && playerDown) {
+        sonic.frameY = 4; sonic.frameX++; sonic.x + 60;
+    }
     //Trying to get falling animation
-     else if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false && sonic.y < 400) {
+     else if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false && sonic.y >= 500) {
         sonic.frameY = 8; sonic.frameX++;
     }
      else if (playerDown === true) {
@@ -340,7 +343,7 @@ function animate() {
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
   else  if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
-  else  if (sonic.frameX < 3 && sonic.frameY <= 2) sonic.frameX++;
+  else  if (sonic.frameX <= 2 && sonic.frameY <= 2) sonic.frameX++;
   else  if (sonic.frameX < 7 && sonic.frameY === 8) sonic.frameX++;
 else  (sonic.frameX = 0);
      
@@ -354,7 +357,7 @@ else  (sonic.frameX = 0);
     
 }
 //increased frames per second
-window.onload = setInterval(animate, 1000 / 50);
+window.onload = setInterval(animate, 1000 / 60);
 animate()
 
 // window.onload is an event that occurs when all the assets
