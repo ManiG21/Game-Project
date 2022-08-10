@@ -278,7 +278,7 @@ function movement() {
     if (playerLeft) {
         sonic.x += -10;
     }
-    if (playerUp)(playerDown)=>{
+    if (playerUp && playerDown){
          sonic.x += 30
     }
 
@@ -330,6 +330,7 @@ function animate() {
      else if (playerUp === true) {
         sonic.frameY = 4; sonic.frameX++;
     }
+    // Trying to create Sonic's spin dash
      else if (playerUp === true && playerDown) {
         sonic.frameY = 4; sonic.frameX++; sonic.x + 60;
     }
