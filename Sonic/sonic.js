@@ -163,7 +163,7 @@ images.player2.src = 'Tails.png';
 class Sonic {
     constructor() {
         this.image = images.player
-        this.x = 10
+        this.x = 75
         this.y = 435
         this.speed = 30
         this.frameY = 0
@@ -277,25 +277,40 @@ function gravity() {
     }
 
 }
+function gravity2() {
+    if (tails.y >= 475) {
+        tails.y = 475;
+        tails.gravityForce = 0
+    } else {
+        tails.gravityForce += .5
+        tails.y += tails.gravityForce;
+
+    }
+
+}
 // constant y axis for sonic
 const groundLevel = 450
 
 function movement() {
     if (playerUp) {
         // gravityForce = 0
-        sonic.y += -20;
+        sonic.y += -20; tails.y += -20;
     }
     if (playerDown) {
         sonic.y = 450;
+        tails.y = 450;
     }
     if (playerRight) {
         sonic.x += 10;
+        tails.x += 10;
     }
     if (playerLeft) {
         sonic.x += -10;
+        tails.x += -10;
     }
     if (playerUp && playerDown){
          sonic.x += 30
+         tails.x += 30
     }
 
 }
@@ -328,6 +343,7 @@ function animate() {
     collRing()
     movement()
     gravity()
+    gravity2()
 
     //https://youtu.be/GVuU25pGaYo   This video helped me find the sprite sheets
     // and taught me how to draw Sonic
@@ -335,6 +351,7 @@ function animate() {
     //animate sprtes
     if( playerUp === false && playerDown === false && playerRight === false && playerLeft === false){
         sonic.frameY = 0; sonic.frameX = 0.7; 
+        tails.frameY = 0; tails.frameX = 0.7; 
       } else if (playerRight === true) {
         sonic.frameY = 2;  sonic.frameX <= 2;
     }
