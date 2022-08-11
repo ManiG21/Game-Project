@@ -14,6 +14,7 @@ ctx.closePath();
 // load images
 const images = {};
 images.player = new Image();
+images.player2 = new Image();
 images.ground = new Image();
 images.ring = new Image();
 images.background = new Image();
@@ -149,6 +150,7 @@ function floor() {
 
 //Adding Sonic sprite from image to my code
 images.player.src = 'Sonic-Sprite3.png';
+images.player2.src = 'Tails.png';
 
 // const playerWidth = 126.5;
 // const playerHeight = 160;
@@ -161,7 +163,7 @@ images.player.src = 'Sonic-Sprite3.png';
 class Sonic {
     constructor() {
         this.image = images.player
-        this.x = 0
+        this.x = 10
         this.y = 435
         this.speed = 30
         this.frameY = 0
@@ -172,6 +174,20 @@ class Sonic {
     }
 }
 const sonic = new Sonic
+class Tails {
+    constructor() {
+        this.image = images.player2
+        this.x = 0
+        this.y = 435
+        this.speed = 30
+        this.frameY = 0
+        this.frameX = 0
+        this.w = 126.5
+        this.h = 160
+        this.gravityForce = 0
+    }
+}
+const tails = new Tails
 
 // const jump = new Sonic(img.src.player,0,4)
 
@@ -324,7 +340,7 @@ function animate() {
     }
      else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
-         sonic.frameX = 0; 
+          
     }
     //Jump animation
      else if (playerUp === true) {
@@ -335,22 +351,24 @@ function animate() {
         sonic.frameY = 4; sonic.frameX++; sonic.x + 60;
     }
     //Trying to get falling animation
-     else if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false && sonic.y >= 500) {
-        sonic.frameY = 8; sonic.frameX++;
+     else if (playerUp === false && sonic.y > groundLevel) {
+        sonic.frameY = 8;sonic.frameX <= 7; sonic.frameX++;
     }
      else if (playerDown === true) {
-        playerAnimations.idle; sonic.frameY = 5; sonic.frameX++;
+         sonic.frameY = 5; sonic.frameX++;
     } else (sonic.frameX = 0);
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
   else  if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
   else  if (sonic.frameX <= 2 && sonic.frameY <= 2) sonic.frameX++;
-  else  if (sonic.frameX < 7 && sonic.frameY === 8) sonic.frameX++;
+  else  if (sonic.frameX < 7 && sonic.frameY >= 8) sonic.frameX++;
 else  (sonic.frameX = 0);
      
 
     drawSprite(images.player, sonic.w * sonic.frameX, sonic.h * sonic.frameY,
         sonic.w, sonic.h, sonic.x, sonic.y, sonic.w, sonic.h);
+    drawSprite(images.player2, tails.w * tails.frameX, tails.h * tails.frameY,
+        tails.w, tails.h, tails.x, tails.y, tails.w, tails.h);
        
 
     // drawSprite(images.player, playerWidth * playerFrameX, sonic.h * sonic.frameY,
