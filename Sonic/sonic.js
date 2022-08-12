@@ -109,6 +109,18 @@ function collRing() {
         ring3.x = Math.random() * canvas.width
         Score++
     }
+    if (isColliding(tails, ring)) {
+        ring.x = Math.random() * canvas.width
+        Score++
+    }
+   else if (isColliding(tails, ring2)) {
+        ring2.x = Math.random() * canvas.width
+        Score++
+    }
+    else if (isColliding(tails, ring3)) {
+        ring3.x = Math.random() * canvas.width
+        Score++
+    }
 }
 
 // function Collision(){
@@ -182,8 +194,8 @@ class Tails {
         this.speed = 30
         this.frameY = 0
         this.frameX = 0
-        this.w = 126.5
-        this.h = 160
+        this.w = 110
+        this.h = 157
         this.gravityForce = 0
     }
 }
@@ -351,9 +363,10 @@ function animate() {
     //animate sprtes
     if( playerUp === false && playerDown === false && playerRight === false && playerLeft === false){
         sonic.frameY = 0; sonic.frameX = 0.7; 
-        tails.frameY = 0; tails.frameX = 0.7; 
+        tails.frameY = 0; tails.frameX = 0; 
       } else if (playerRight === true) {
         sonic.frameY = 2;  sonic.frameX <= 2;
+        // tails.frameY = 2;  tails.frameX <= 9;
     }
      else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
@@ -362,6 +375,7 @@ function animate() {
     //Jump animation
      else if (playerUp === true) {
         sonic.frameY = 4; sonic.frameX++;
+        tails.frameY = 3.49; tails.frameX++;
     }
     // Trying to create Sonic's spin dash
      else if (playerUp === true && playerDown) {
@@ -373,13 +387,18 @@ function animate() {
     }
      else if (playerDown === true) {
          sonic.frameY = 5; sonic.frameX++;
-    } else (sonic.frameX = 0);
+    } else sonic.frameX = 0; tails.frameX = 0;
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
   else  if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
   else  if (sonic.frameX <= 2 && sonic.frameY <= 2) sonic.frameX++;
   else  if (sonic.frameX < 7 && sonic.frameY >= 8) sonic.frameX++;
-else  (sonic.frameX = 0);
+else  sonic.frameX = 0; 
+//     if (tails.frameX < 9 && tails.frameY <= 0) tails.frameX++;
+//   else  if (tails.frameX < 4 && tails.frameY <= 4) tails.frameX++;
+//   else  if (tails.frameX <= 2 && tails.frameY <= 2) tails.frameX++;
+//   else  if (tails.frameX < 7 && tails.frameY >= 8) tails.frameX++;
+// else  tails.frameX = 0; 
      
 
     drawSprite(images.player, sonic.w * sonic.frameX, sonic.h * sonic.frameY,
