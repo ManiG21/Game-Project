@@ -15,6 +15,7 @@ ctx.closePath();
 const images = {};
 images.player = new Image();
 images.player2 = new Image();
+images.boss = new Image();
 images.ground = new Image();
 images.ring = new Image();
 images.background = new Image();
@@ -163,6 +164,7 @@ function floor() {
 //Adding Sonic sprite from image to my code
 images.player.src = 'Sonic-Sprite3.png';
 images.player2.src = 'Tails.png';
+images.boss.src = 'Metal Sonic & Silver Sonic3.png';
 
 // const playerWidth = 126.5;
 // const playerHeight = 160;
@@ -200,6 +202,20 @@ class Tails {
     }
 }
 const tails = new Tails
+class MetalSonic {
+    constructor() {
+        this.image = images.boss
+        this.x = 1100
+        this.y = 435
+        this.speed = 30
+        this.frameY = 2.9
+        this.frameX = 6
+        this.w = 119
+        this.h = 177
+        this.gravityForce = 0
+    }
+}
+const metal = new MetalSonic
 
 // const jump = new Sonic(img.src.player,0,4)
 
@@ -405,6 +421,8 @@ else  sonic.frameX = 0;
         sonic.w, sonic.h, sonic.x, sonic.y, sonic.w, sonic.h);
     drawSprite(images.player2, tails.w * tails.frameX, tails.h * tails.frameY,
         tails.w, tails.h, tails.x, tails.y, tails.w, tails.h);
+    drawSprite(images.boss, metal.w * metal.frameX, metal.h * metal.frameY,
+        metal.w, metal.h, metal.x, metal.y, metal.w, metal.h);
        
 
     // drawSprite(images.player, playerWidth * playerFrameX, sonic.h * sonic.frameY,
