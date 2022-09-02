@@ -102,7 +102,7 @@ function collRing() {
         ring.x = Math.random() * canvas.width
         Score++
     }
-   else if (isColliding(sonic, ring2)) {
+    else if (isColliding(sonic, ring2)) {
         ring2.x = Math.random() * canvas.width
         Score++
     }
@@ -114,7 +114,7 @@ function collRing() {
         ring.x = Math.random() * canvas.width
         Score++
     }
-   else if (isColliding(tails, ring2)) {
+    else if (isColliding(tails, ring2)) {
         ring2.x = Math.random() * canvas.width
         Score++
     }
@@ -229,36 +229,36 @@ const playerAnimations = {
         // startY: 0,
         // frames: 16,
         // width: 40
-        image : images.player,
+        image: images.player,
         // x : 0,
         // y :435,
-        speed : 30,
-        frameY : 0,
-        frameX : 4,
-        w : 40,
-        h : 140,
+        speed: 30,
+        frameY: 0,
+        frameX: 4,
+        w: 40,
+        h: 140,
         // gravityForce : 0
     },
     run: {
-        frameX: 0, 
+        frameX: 0,
         frameY: 2,
         frames: 3,
         width: 126
     },
     jump: {
-        frameX: 0, 
+        frameX: 0,
         frameY: 4,
         frames: 4,
         width: 60
     },
     crouch: {
-        startX: 0, 
+        startX: 0,
         frameY: 5,
         frames: 3,
         width: 60
     },
     fall: {
-        startX: 0, 
+        startX: 0,
         startY: 8,
         frames: 3,
         width: 60
@@ -316,6 +316,17 @@ function gravity2() {
     }
 
 }
+function gravity3() {
+    if (metal.y >= 475) {
+        metal.y = 475;
+        metal.gravityForce = 0
+    } else {
+        metal.gravityForce += .6
+        metal.y += metal.gravityForce;
+
+    }
+
+}
 // constant y axis for sonic
 const groundLevel = 450
 
@@ -336,9 +347,9 @@ function movement() {
         sonic.x += -10;
         tails.x += -10;
     }
-    if (playerUp && playerDown){
-         sonic.x += 30
-         tails.x += 30
+    if (playerUp && playerDown) {
+        sonic.x += 30
+        tails.x += 30
     }
 
 }
@@ -377,45 +388,45 @@ function animate() {
     // and taught me how to draw Sonic
     // Abe helped me get rid of background for the sprite, I figured out resize
     //animate sprtes
-    if( playerUp === false && playerDown === false && playerRight === false && playerLeft === false){
-        sonic.frameY = 0; sonic.frameX = 0.7; 
-        tails.frameY = 0; tails.frameX = 0; 
-      } else if (playerRight === true) {
-        sonic.frameY = 2;  sonic.frameX <= 2;
+    if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false) {
+        sonic.frameY = 0; sonic.frameX = 0.7;
+        tails.frameY = 0; tails.frameX = 0;
+    } else if (playerRight === true) {
+        sonic.frameY = 2; sonic.frameX <= 2;
         // tails.frameY = 2;  tails.frameX <= 9;
     }
-     else if (playerLeft === true) {
+    else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
-          
+
     }
     //Jump animation
-     else if (playerUp === true) {
+    else if (playerUp === true) {
         sonic.frameY = 4; sonic.frameX++;
         tails.frameY = 3.49; tails.frameX++;
     }
     // Trying to create Sonic's spin dash
-     else if (playerUp === true && playerDown) {
+    else if (playerUp === true && playerDown) {
         sonic.frameY = 4; sonic.frameX++; sonic.x + 60;
     }
     //Trying to get falling animation
-     else if (playerUp === false && sonic.y > groundLevel) {
-        sonic.frameY = 8;sonic.frameX <= 7; sonic.frameX++;
+    else if (playerUp === false && sonic.y > groundLevel) {
+        sonic.frameY = 8; sonic.frameX <= 7; sonic.frameX++;
     }
-     else if (playerDown === true) {
-         sonic.frameY = 5; sonic.frameX++;
+    else if (playerDown === true) {
+        sonic.frameY = 5; sonic.frameX++;
     } else sonic.frameX = 0; tails.frameX = 0;
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
-  else  if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
-  else  if (sonic.frameX <= 2 && sonic.frameY <= 2) sonic.frameX++;
-  else  if (sonic.frameX < 7 && sonic.frameY >= 8) sonic.frameX++;
-else  sonic.frameX = 0; 
-//     if (tails.frameX < 9 && tails.frameY <= 0) tails.frameX++;
-//   else  if (tails.frameX < 4 && tails.frameY <= 4) tails.frameX++;
-//   else  if (tails.frameX <= 2 && tails.frameY <= 2) tails.frameX++;
-//   else  if (tails.frameX < 7 && tails.frameY >= 8) tails.frameX++;
-// else  tails.frameX = 0; 
-     
+    else if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
+    else if (sonic.frameX <= 2 && sonic.frameY <= 2) sonic.frameX++;
+    else if (sonic.frameX < 7 && sonic.frameY >= 8) sonic.frameX++;
+    else sonic.frameX = 0;
+    //     if (tails.frameX < 9 && tails.frameY <= 0) tails.frameX++;
+    //   else  if (tails.frameX < 4 && tails.frameY <= 4) tails.frameX++;
+    //   else  if (tails.frameX <= 2 && tails.frameY <= 2) tails.frameX++;
+    //   else  if (tails.frameX < 7 && tails.frameY >= 8) tails.frameX++;
+    // else  tails.frameX = 0; 
+
 
     drawSprite(images.player, sonic.w * sonic.frameX, sonic.h * sonic.frameY,
         sonic.w, sonic.h, sonic.x, sonic.y, sonic.w, sonic.h);
@@ -423,11 +434,11 @@ else  sonic.frameX = 0;
         tails.w, tails.h, tails.x, tails.y, tails.w, tails.h);
     drawSprite(images.boss, metal.w * metal.frameX, metal.h * metal.frameY,
         metal.w, metal.h, metal.x, metal.y, metal.w, metal.h);
-       
+
 
     // drawSprite(images.player, playerWidth * playerFrameX, sonic.h * sonic.frameY,
     //     playerWidth, playerHeight, sonic.x, sonic.y, playerWidth, playerHeight);
-    
+
 }
 //increased frames per second
 window.onload = setInterval(animate, 1000 / 60);
