@@ -23,11 +23,13 @@ images.player.onload = function () {
 
 }
 
-images.ring.src = 'sonic-rings.png';
-function drawRing(img, sX, sY, sW, sH) {
-    ctx.drawImage(img, sX, sY, sW, sH);
-}
+// images.rings.src = 'sonic-rings.png';
+// function drawRing(img, sX, sY, sW, sH) {
+//     ctx.drawImage(img, sX, sY, sW, sH);
+// }
+
 //Link to image: https://www.artstation.com/artwork/3dwbWA
+// images.background.src = 'Son-back.gif';
 images.background.src = 'Green-hill-background.jpg';
 function drawBackG(img, sX, sY, sW, sH) {
     ctx.drawImage(img, sX, sY, sW, sH);
@@ -139,6 +141,10 @@ function back() {
     //Draw second background offest first one
     //scroll + canvas.width
 }
+
+// function ring(){
+//     drawRing(images.rings, 300, 20, 0, 500)
+// }
 
 //Draw second background offest first one
 //scroll + canvas.width
@@ -383,6 +389,7 @@ function animate() {
     movement()
     gravity()
     gravity2()
+    // ring()
 
     //https://youtu.be/GVuU25pGaYo   This video helped me find the sprite sheets
     // and taught me how to draw Sonic
