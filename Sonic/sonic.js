@@ -203,7 +203,7 @@ class Tails {
         this.frameY = 0
         this.frameX = 0
         this.w = 110
-        this.h = 157
+        this.h = 135
         this.gravityForce = 0
     }
 }
@@ -422,7 +422,7 @@ function animate() {
     }
     else if (playerDown === true) {
         sonic.frameY = 5; sonic.frameX++;
-        tails.frameY = 6; 
+        tails.frameY = 5; 
     } else sonic.frameX = 0; tails.frameX = 0;
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
