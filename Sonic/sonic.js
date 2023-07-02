@@ -397,16 +397,13 @@ function animate() {
     // this.w = 110
     // this.h = 135
     //animate sprites
-    if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false) {
-        sonic.frameY = 0; sonic.frameX = 0.7;
-        tails.frameY = 0; tails.w = 110; tails.frameX = 0;
-    } else if (playerRight === true) {
+     if (playerRight === true) {
         sonic.frameY = 2; sonic.frameX <= 4;
-        tails.frameY = 2.3;tails.w = 148;  tails.frameX <= 9;
+        tails.frameY = 2.2;tails.w = 150;tails.h = 140;  tails.frameX++;
     }
     else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
-        tails.frameY = 2;  tails.frameX <= 9;
+        tails.frameY = 2;tails.w = 150; tails.h = 140;   tails.frameX++;
         
     }
     //Jump animation
@@ -424,8 +421,15 @@ function animate() {
     }
     else if (playerDown === true) {
         sonic.frameY = 5; sonic.frameX++;
-        tails.frameY = 5; 
-    } else sonic.frameX = 0; tails.frameX = 0;
+        tails.frameY = 5.7; 
+        // tails.w = 122; tails.h = 120;
+        // tails.h = 135
+        
+    } else if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false) {
+        sonic.frameY = 0; sonic.frameX = 0.7;
+        tails.frameY = 0; tails.w = 110; tails.frameX = 0;
+    }
+    else sonic.frameX = 0; tails.frameX = 0;
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
     else if (sonic.frameX < 4 && sonic.frameY <= 4) sonic.frameX++;
