@@ -312,8 +312,8 @@ function gravity() {
 
 }
 function gravity2() {
-    if (tails.y >= 475) {
-        tails.y = 475;
+    if (tails.y >= groundLevel) {
+        tails.y = groundLevel;
         tails.gravityForce = 0
     } else {
         tails.gravityForce += .5
@@ -346,8 +346,8 @@ function movement() {
         tails.y = 450;
     }
     if (playerRight) {
-        sonic.x += 10;
-        tails.x += 10;
+        sonic.x += 12;
+        tails.x += 12;
     }
     if (playerLeft) {
         sonic.x += -10;
@@ -399,12 +399,13 @@ function animate() {
         sonic.frameY = 0; sonic.frameX = 0.7;
         tails.frameY = 0; tails.frameX = 0;
     } else if (playerRight === true) {
-        sonic.frameY = 2; sonic.frameX <= 2;
-        // tails.frameY = 2;  tails.frameX <= 9;
+        sonic.frameY = 2; sonic.frameX <= 4;
+        tails.frameY = 2;  tails.frameX <= 9;
     }
     else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
-
+        tails.frameY = 2;  tails.frameX <= 9;
+        
     }
     //Jump animation
     else if (playerUp === true) {
@@ -421,6 +422,7 @@ function animate() {
     }
     else if (playerDown === true) {
         sonic.frameY = 5; sonic.frameX++;
+        tails.frameY = 6; 
     } else sonic.frameX = 0; tails.frameX = 0;
 
     if (sonic.frameX < 4 && sonic.frameY <= 0) sonic.frameX++;
