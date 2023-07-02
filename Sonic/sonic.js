@@ -394,13 +394,15 @@ function animate() {
     //https://youtu.be/GVuU25pGaYo   This video helped me find the sprite sheets
     // and taught me how to draw Sonic
     // Abe helped me get rid of background for the sprite, I figured out resize
-    //animate sprtes
+    // this.w = 110
+    // this.h = 135
+    //animate sprites
     if (playerUp === false && playerDown === false && playerRight === false && playerLeft === false) {
         sonic.frameY = 0; sonic.frameX = 0.7;
-        tails.frameY = 0; tails.frameX = 0;
+        tails.frameY = 0; tails.w = 110; tails.frameX = 0;
     } else if (playerRight === true) {
         sonic.frameY = 2; sonic.frameX <= 4;
-        tails.frameY = 2;  tails.frameX <= 9;
+        tails.frameY = 2.3;tails.w = 148;  tails.frameX <= 9;
     }
     else if (playerLeft === true) {
         sonic.frameY = 2; sonic.frameX++;
