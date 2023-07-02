@@ -183,7 +183,7 @@ images.boss.src = 'Metal Sonic & Silver Sonic3.png';
 class Sonic {
     constructor() {
         this.image = images.player
-        this.x = 75
+        this.x = 100
         this.y = 435
         this.speed = 30
         this.frameY = 0
@@ -410,7 +410,7 @@ function animate() {
     //Jump animation
     else if (playerUp === true) {
         sonic.frameY = 4; sonic.frameX++;
-        tails.frameY = 3.49; tails.frameX++;
+        tails.frameY = 4.2;tails.w = 124; tails.frameX <= 2;
     }
     // Trying to create Sonic's spin dash
     else if (playerUp === true && playerDown) {
